@@ -43,62 +43,23 @@ function categoryCreate(name, description, cb) {
   }  );
 }
 
-function genreCreate(name, cb) {
-  var genre = new Genre({ name: name });
+function itemCreate(name, description, price, numberinstock, category, cb) {
+    itemdetail = { name: name, description: description, price: price, numberinstock: numberinstock, category: category };
+    //check for false?
+  var item = new Item(itemdetail);
        
-  genre.save(function (err) {
+  item.save(function (err) {
     if (err) {
       cb(err, null);
       return;
     }
-    console.log('New Genre: ' + genre);
-    genres.push(genre)
-    cb(null, genre);
-  }   );
-}
-
-function bookCreate(title, summary, isbn, author, genre, cb) {
-  bookdetail = { 
-    title: title,
-    summary: summary,
-    author: author,
-    isbn: isbn
-  }
-  if (genre != false) bookdetail.genre = genre
-    
-  var book = new Book(bookdetail);    
-  book.save(function (err) {
-    if (err) {
-      cb(err, null)
-      return
-    }
-    console.log('New Book: ' + book);
-    books.push(book)
-    cb(null, book)
-  }  );
+    console.log('New Item: ' + item);
+    items.push(item)
+    cb(null, item);
+  });
 }
 
 
-function bookInstanceCreate(book, imprint, due_back, status, cb) {
-  bookinstancedetail = { 
-    book: book,
-    imprint: imprint
-  }    
-  if (due_back != false) bookinstancedetail.due_back = due_back
-  if (status != false) bookinstancedetail.status = status
-    
-  var bookinstance = new BookInstance(bookinstancedetail);    
-  bookinstance.save(function (err) {
-    if (err) {
-      console.log('ERROR CREATING BookInstance: ' + bookinstance);
-      cb(err, null)
-      return
-    }
-    console.log('New BookInstance: ' + bookinstance);
-    bookinstances.push(bookinstance)
-    cb(null, book)
-  }  );
-}
 
 
 function createGenreAuthors(cb) {
@@ -215,7 +176,7 @@ function(err, results) {
         console.log('FINAL ERR: '+err);
     }
     else {
-        console.log('BOOKInstances: '+bookinstances);
+        console.log('All done, disconnect from database: ');
         
     }
     // All done, disconnect from database
