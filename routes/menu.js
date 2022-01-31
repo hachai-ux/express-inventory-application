@@ -27,11 +27,6 @@ router.get('/category/:id/update', category_controller.category_update_get);
 // POST request to update Category.
 router.post('/category/:id/update', category_controller.category_update_post);
 
-// GET request for one Category.
-router.get('/category/:id', category_controller.category_detail);
-
-// GET request for list of all Category items.
-router.get('/categories', category_controller.category_list);
 
 
 /// ITEM ROUTES ///
