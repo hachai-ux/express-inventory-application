@@ -26,7 +26,7 @@ ItemSchema.path('price').set(function (num) {
 ItemSchema
 .virtual('url')
 .get(function () {
-  return '/item/' + this._id;
+  return '/menu/item/' + this._id;
 });
 
 //Export model

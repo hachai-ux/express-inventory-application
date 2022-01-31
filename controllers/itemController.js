@@ -1,13 +1,14 @@
 var Item = require('../models/item');
 
-//display list of all items
-exports.item_list = function (req, res) {
-    res.send('Not implemented: category list');
-}
-
 // Display detail page for a specific Item.
-exports.item_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category detail: ' + req.params.id);
+exports.item_detail = function(req, res, next) {
+    Item.findById(req.params.id)
+        .populate('category')
+        .exec(function (err, item) {
+            if (err) { return next(err); }
+            //Successful, so render
+            res.render('item', { item: item });
+        });
 };
 
 // Display Item create form on GET.
