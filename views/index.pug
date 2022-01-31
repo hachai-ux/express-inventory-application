@@ -15,6 +15,16 @@ block content
         li
           h3 #{category.name}
           p #{category.description}
+          
+          ul
+            each item in items
+              //categories are arrays
+              if item.category[0].name == category.name
+                li
+                  h4 #{item.name}
+                  p #{item.description}
+                  p Price: #{item.price}
+                  p Stock(today): #{item.numberinstock}
 
    
 

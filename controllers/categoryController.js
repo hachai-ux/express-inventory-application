@@ -24,6 +24,7 @@ exports.index = function(req, res, next) {
         },
         items: function (callback) {
             Item.find({})
+                .populate('category')
                 .exec(callback);
         }
     }, function (err, results) {
