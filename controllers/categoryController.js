@@ -16,14 +16,17 @@ exports.index = function(req, res) {
 };
 
 //display list of all categories
-exports.category_list = function (req, res) {
-    res.send('Not implemented: category list');
+exports.category_list = function (req, res, next) {
+    
+  Category.find({}, 'name description')
+    .sort({name : 1})
+    .exec(function (err, list_categories) {
+      if (err) { return next(err); }
+      //Successful, so render
+      res.render('category_list', { title: 'Category List', category_list: list_categories });
+    });
 }
 
-// Display detail page for a specific Category.
-exports.category_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category detail: ' + req.params.id);
-};
 
 // Display Category create form on GET.
 exports.category_create_get = function(req, res) {
