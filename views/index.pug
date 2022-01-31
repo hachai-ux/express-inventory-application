@@ -2,4 +2,16 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em Vietnamese Restaurant], a very basic restaurant website with categorized menu items, which you can create, read, update and delete(everyone is an admin).
+
+  h1 Dynamic content
+
+  if error
+    p Error getting dynamic content.
+  else
+    p The library has the following record counts:
+
+    ul
+      li #[strong Categories:] !{data.category_count}
+      li #[strong Items:] !{data.item_count}
+

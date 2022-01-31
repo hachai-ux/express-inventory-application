@@ -1,4 +1,19 @@
 var Category = require('../models/category');
+var Item = require('../models/item');
+var async = require('async');
+
+exports.index = function(req, res) {
+     async.parallel({
+        category_count: function(callback) {
+            Category.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
+        },
+        item_count: function(callback) {
+            Item.countDocuments({}, callback);
+        },
+    }, function(err, results) {
+        res.render('index', { title: 'Vietnamese Restaurant Home', error: err, data: results });
+    });
+};
 
 //display list of all categories
 exports.category_list = function (req, res) {
