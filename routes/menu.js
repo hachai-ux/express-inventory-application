@@ -27,6 +27,9 @@ router.get('/category/:id/update', category_controller.category_update_get);
 // POST request to update Category.
 router.post('/category/:id/update', category_controller.category_update_post);
 
+// GET request to Category detail page.
+router.get('/category/:id/', category_controller.category_detail);
+
 
 
 /// ITEM ROUTES ///

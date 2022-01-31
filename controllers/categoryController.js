@@ -33,6 +33,15 @@ exports.index = function(req, res, next) {
     })
 };
 
+// Display detail page for a specific Item.
+exports.category_detail = function(req, res, next) {
+    Category.findById(req.params.id)
+        .exec(function (err, category) {
+            if (err) { return next(err); }
+            //Successful, so render
+            res.render('category', { category: category });
+        });
+};
 
 
 // Display Category create form on GET.

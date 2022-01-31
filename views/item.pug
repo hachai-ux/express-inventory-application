@@ -9,7 +9,7 @@ block content
     p #{item.description}
     p Price: #{item.price}
     p Stock(today): #{item.numberinstock}
-    p Part of this category:#{item.category[0].name}]
+    p Part of this category: #[a(href=item.category[0].url) #{item.category[0].name}]
 
 
 
