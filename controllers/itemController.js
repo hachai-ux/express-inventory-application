@@ -105,9 +105,23 @@ exports.item_create_post = [
 
 
 // Display Itemdelete form on GET.
-exports.item_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author delete GET');
+exports.item_delete_get = function(req, res, next) {
+
+        //item carries category data
+    Item.findById(req.params.id).exec()
+        .populate('category')
+        .exec(function (err, item) {
+            if (err) { return next(err); }
+            //Successful, so render
+            if (item==null) { // No results.
+            res.redirect('/menu');
+            }
+            // Successful, so render.
+            res.render('item_delete', { title: 'Delete Item', item: item } );
+        })
+     
 };
+
 
 // Handle Item delete on POST.
 exports.item_delete_post = function(req, res) {
