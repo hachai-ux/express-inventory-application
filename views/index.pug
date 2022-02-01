@@ -13,7 +13,7 @@ block content
     ul
       each category in categories
         li
-          h3 #{category.name}
+          h3 #[a(href=category.url) #{category.name}]
           p #{category.description}
           
           ul
