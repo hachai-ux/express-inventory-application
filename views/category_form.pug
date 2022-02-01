@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') Category:
+      input#name.form-control(type='text', placeholder='Vietnamese Specialities, Bao Burgers etc.' name='name' value=(category===undefined? '' : category.name))
+      label(for='description') Description:
+      input#name.form-control(type='text', placeholder='Variety of traditional noodle meals etc.' name='name' value=(category===undefined? '' : category.description))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+   ul
+    for error in errors
+     li!= error.msg
