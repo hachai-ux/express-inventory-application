@@ -20,7 +20,10 @@ block content
         select#author.form-control(type='select', placeholder='Select category' name='category' required='true' )
             for category in categories
                 if item
-                    option(value=category._id selected=((category._id.toString()==item.category._id) || (category._id.toString()==item.category[0])) ? 'selected' : false) #{category.name}
+                    script
+                        | var value = !{JSON.stringify(item.category)};
+                        | console.log(value)
+                    option(value=category._id selected=((category._id.toString()==item.category._id) || (category._id.toString()==item.category[0]._id)) ? 'selected' : false) #{category.name}
                 else
                     option(value=category._id) #{category.name}
     button.btn.btn-primary(type='submit') Submit
