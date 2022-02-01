@@ -11,16 +11,16 @@ block content
       input#title.form-control(type='text', placeholder='Description of item' name='description' required='true' value=(undefined===item ? '' : item.description) )
     div.form-group
       label(for='price') Price:
-      input#summary.form-control(type='number', placeholder='Price of item' name='price' required='true') #{undefined===item? '' : item.price}
+      input#summary.form-control(type='number', placeholder='Price of item' name='price' required='true' value=(undefined===item? '' : item.price))
     div.form-group
-      label(for='numberinstock') Numberinstock:
-      input#isbn.form-control(type='number', placeholder='Stock of item' name='numberinstock' value=(undefined===item ? '' : item.numberinstock) required='true')
+        label(for='numberinstock') Numberinstock:
+        input#isbn.form-control(type='number', placeholder='Stock of item' name='numberinstock' value=(undefined===item ? '' : item.numberinstock) required='true')
     div.form-group
         label(for='category') Category:
         select#author.form-control(type='select', placeholder='Select category' name='category' required='true' )
             for category in categories
                 if item
-                    option(value=category._id selected=(category._id.toString()===item.category._id.toString() ? 'selected' : false) ) #{category.name}
+                    option(value=category._id selected=((category._id.toString()==item.category._id) || (category._id.toString()==item.category[0])) ? 'selected' : false) #{category.name}
                 else
                     option(value=category._id) #{category.name}
     button.btn.btn-primary(type='submit') Submit
