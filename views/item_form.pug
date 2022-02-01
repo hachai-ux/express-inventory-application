@@ -11,7 +11,7 @@ block content
       input#title.form-control(type='text', placeholder='Description of item' name='description' required='true' value=(undefined===item ? '' : item.description) )
     div.form-group
       label(for='price') Price:
-      textarea#summary.form-control(type='number', placeholder='Price of item' name='price' required='true') #{undefined===item? '' : item.price}
+      input#summary.form-control(type='number', placeholder='Price of item' name='price' required='true') #{undefined===item? '' : item.price}
     div.form-group
       label(for='numberinstock') Numberinstock:
       input#isbn.form-control(type='number', placeholder='Stock of item' name='numberinstock' value=(undefined===item ? '' : item.numberinstock) required='true')
