@@ -17,10 +17,10 @@ exports.item_detail = function(req, res, next) {
 // Display Item create form on GET.
 exports.item_create_get = function(req, res, next) {
     Category.find()
-        .exec(function (err, category) {
+        .exec(function (err, categories) {
             if (err) { return next(err); }
             //Successful, so render
-            res.render('item_form', { title: 'Create Item', category: category });
+            res.render('item_form', { title: 'Create Item', categories: categories });
         })
 };
 
@@ -64,16 +64,16 @@ exports.item_create_post = [
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values/error messages.
          Category.find()
-        .exec(function (err, category) {
+        .exec(function (err, categories) {
             if (err) { return next(err); }
             //Successful, so render
             // Mark our selected category as checked.
-                for (let i = 0; i < category.length; i++) {
-                    if (item.category.indexOf(category[i]._id) > -1) {
-                        category[i].checked='true';
+                for (let i = 0; i < categories.length; i++) {
+                    if (item.category.indexOf(categories[i]._id) > -1) {
+                        categories[i].checked='true';
                     }
                 }
-            res.render('item_form', { title: 'Create Item', item: item, category: category, errors: errors.array() });
+            res.render('item_form', { title: 'Create Item', item: item, categories: categories, errors: errors.array() });
         })
       return;
     }

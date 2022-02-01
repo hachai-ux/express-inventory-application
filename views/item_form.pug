@@ -1,17 +1,31 @@
 extends layout
 
 block content
-  h1 #{title}
+  h1= title
 
   form(method='POST' action='')
     div.form-group
-      label(for='name') Item:
-      input#name.form-control(type='text', placeholder='Bun, Pho etc.' name='name' value=(undefined===item? '' : item.name))
+      label(for='name') Name:
+      input#title.form-control(type='text', placeholder='Name of item' name='name' required='true' value=(undefined===item ? '' : item.name) )
       label(for='description') Description:
-      input#name.form-control(type='text', placeholder='Bun, Pho etc.' name='name' value=(undefined===item? '' : item.name))
+      input#title.form-control(type='text', placeholder='Description of item' name='description' required='true' value=(undefined===item ? '' : item.description) )
+    div.form-group
+      label(for='price') Price:
+      textarea#summary.form-control(type='number', placeholder='Price of item' name='price' required='true') #{undefined===item? '' : item.price}
+    div.form-group
+      label(for='numberinstock') Numberinstock:
+      input#isbn.form-control(type='number', placeholder='Stock of item' name='numberinstock' value=(undefined===item ? '' : item.numberinstock) required='true')
+    div.form-group
+        label(for='category') Category:
+        select#author.form-control(type='select', placeholder='Select category' name='category' required='true' )
+            for category in categories
+                if item
+                    option(value=category._id selected=(category._id.toString()===item.category._id.toString() ? 'selected' : false) ) #{category.name}
+                else
+                    option(value=category._id) #{category.name}
     button.btn.btn-primary(type='submit') Submit
 
   if errors
-   ul
-    for error in errors
-     li!= error.msg
+    ul
+      for error in errors
+        li!= error.msg
