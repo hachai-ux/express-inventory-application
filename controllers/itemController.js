@@ -108,7 +108,7 @@ exports.item_create_post = [
 exports.item_delete_get = function(req, res, next) {
 
         //item carries category data
-    Item.findById(req.params.id).exec()
+    Item.findById(req.params.id)
         .populate('category')
         .exec(function (err, item) {
             if (err) { return next(err); }
@@ -122,11 +122,18 @@ exports.item_delete_get = function(req, res, next) {
      
 };
 
-
-// Handle Item delete on POST.
-exports.item_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author delete POST');
+// Handle Author delete on POST.
+exports.item_delete_post = function (req, res, next) {
+    
+    //item carries category data
+    Item.findByIdAndRemove(req.body.itemid, function deleteItem(err) {
+        if (err) { return next(err); }
+        //Successful, so render
+        res.redirect('/menu');
+    })
 };
+   
+
 
 // Display Item update form on GET.
 exports.item_update_get = function(req, res) {
